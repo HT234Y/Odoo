@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="persons" model="ir.actions.act_window">
+			<field name="name">person list</field>
+	     	<field name="model">person.person</field>
+	     	<field name="view_mod">tree,form</field>
+	    	<field name="arch" type="xml"></field>
+		</record>
+
+		<!-- actions opening views on models -->
+
+	    <record model="ir.actions.act_window" id="person.action_window">
+	      <field name="name">person window</field>
+	      <field name="res_model">person.person</field>
+	      <field name="view_mode">tree,form</field>
+	    </record> 
+
+	        <!-- server action to the one above -->
+
+	    <record model="ir.actions.server" id="person.action_server">
+	      <field name="name">person server</field>
+	      <field name="model_id" ref="model_person_person"/>
+	      <field name="state">code</field>
+	      <field name="code">
+	        action = {
+	          "type": "ir.actions.act_window",
+	          "view_mode": "tree,form",
+	          "res_model": model._name,
+	        }
+	      </field>
+	    </record>
+
+
+	    <!-- Top menu item -->
+
+	    <menuitem name="person" id="person.menu_root"/>
+
+	    <!-- menu categories -->
+
+	    <menuitem name="Menu 1" id="person.menu_1" parent="person.menu_root"/>
+	    <menuitem name="Menu 2" id="person.menu_2" parent="person.menu_root"/>
+
+	    <!-- actions -->
+
+	    <menuitem name="List" id="person.menu_1_list" parent="person.menu_1"
+	              action="person.action_window"/>
+	    <menuitem name="Server to list" id="person" parent="person.menu_2"
+	              action="person.action_server"/>
+    </data>
+</odoo>

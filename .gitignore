@@ -1,0 +1,5 @@
+*.pyc
+website/
+.git/
+config.pub
+config
