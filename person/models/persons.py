@@ -9,7 +9,7 @@ class Persons(models.Model):
 
     first_name = fields.Char(required=True)
     last_name = fields.Char(required=True)
-    full_name = '{0} {1}'.format(first_name, last_name)
+    full_name = fields.Char(compute='_compute_full_name')
     birthday = fields.Date(string='Dates')
     age = fields.Integer(compute='_compute_age')
     sex = fields.Selection([
@@ -23,3 +23,6 @@ class Persons(models.Model):
             d1 = self.birthday
             d2 = date.today()
             self.age = relativedelta(d2, d1).years
+
+    def _compute_full_name(self):
+        return "{0} {1}".format(first_name, last_name)
