@@ -5,7 +5,22 @@
 			<field name="name">person list</field>
 			<field name="res_model">person.person</field>
 			<field name="view_mode">tree,form</field>
-			<field name="arch" type="xml">
+		</record>
+
+		<!-- actions opening views on models -->
+
+		<record model="ir.actions.act_window" id="person.action_window">
+	    	<field name="name">person window</field>
+			<field name="res_model">person.person</field>
+	    	<field name="view_mode">tree,form</field>
+		</record>
+
+		<!-- view persons form -->
+
+		<record id="view_persons_form" model="ir.ui.view">
+            <field name="name">person.form</field>
+            <field name="model">person.person</field>
+            <field name="arch" type="xml">
 				<form string="Persons form">
 					<group>
 						<separator string="First name"/>
@@ -35,15 +50,7 @@
 			</field>
 		</record>
 
-		<!-- actions opening views on models -->
-
-		<record model="ir.actions.act_window" id="person.action_window">
-	    	<field name="name">person window</field>
-			<field name="res_model">person.person</field>
-	    	<field name="view_mode">tree,form</field>
-		</record>
-
-	        <!-- server action to the one above -->
+		<!-- server action to the one above -->
 
 		<record model="ir.actions.server" id="person.action_server">
 	    	<field name="name">person server</field>
